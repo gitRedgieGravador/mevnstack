@@ -158,6 +158,33 @@ export default {
           date: new Date().toDateString(),
           time: "9 AM",
           organization: "Passerelles Numeriques"
+        },
+        {
+          badgename: "Medical Mission",
+          description:
+            "This certificate is issue upon the active voluntarism offered during the medical mission for free vacination",
+          venue: "Talamban health center",
+          date: new Date().toDateString(),
+          time: "9 AM",
+          organization: "Passerelles Numeriques"
+        },
+        {
+          badgename: "Medical Mission",
+          description:
+            "This certificate is issue upon the active voluntarism offered during the medical mission for free vacination",
+          venue: "Talamban health center",
+          date: new Date().toDateString(),
+          time: "9 AM",
+          organization: "Passerelles Numeriques"
+        },
+        {
+          badgename: "Medical Mission",
+          description:
+            "This certificate is issue upon the active voluntarism offered during the medical mission for free vacination",
+          venue: "Talamban health center",
+          date: new Date().toDateString(),
+          time: "9 AM",
+          organization: "Passerelles Numeriques"
         }
       ],
       profileinfo: [],
@@ -180,7 +207,7 @@ export default {
   },
   methods: {
     updatePost() {
-      let uri = `http://localhost:4000/posts/update/${this.$route.params.id}`;
+      let uri = `http://localhost:4000/user/regular/profile/update/${this.$route.params.id}`;
       this.axios.post(uri, this.post).then(() => {
         this.$router.push({ name: "posts" });
       });
