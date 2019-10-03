@@ -2,10 +2,10 @@
   <div id="userpage">
     <div class="bv-example-row pd-side">
       <b-row>
-        <b-col cols="3" class="border-right">
+        <b-col class="border-right">
           <div class="text-center">
             <b-card>
-              <img src="@/assets/profile.png" alt class="border rounded-circle" id="profile" />
+              <img src="@/assets/profile.png" alt class="border" id="profile">
             </b-card>
             <div class="card-header">
               <h3>{{ name }}</h3>
@@ -37,21 +37,25 @@
             </div>
           </div>
           <div v-if="isBadgeList">
-            <b-card>
-              <b-row class="justify-content-md-center">
-                <b-col cols="4" class="text-center">
-                  <img src="@/assets/image.png" class />
-                </b-col>
-                <b-col class="border-left">
-                  <h4>{{ badgename }}</h4>
-                  <p>{{ description }}</p>
-                  <p>Venue: {{ venue }}</p>
-                  <p>Date: {{ date }} at {{ time }}</p>
-                  <p>Issued by: {{ organization }}</p>
-                  <p></p>
-                </b-col>
-              </b-row>
-            </b-card>
+            <div id="divBabge">
+              <div v-for="(badge, index) in this.badgelist" :key="index">
+                <b-card>
+                  <b-row class="justify-content-md-center">
+                    <b-col class="text-center">
+                      <img src="@/assets/image.png" class>
+                    </b-col>
+                    <b-col cols="8" class="border-left">
+                      <h4>{{ badge.badgename }}</h4>
+                      <p>{{ badge.descriptions }}</p>
+                      <p>Venue: {{ badge.venue }}</p>
+                      <p>Date: {{ badge.date }} at {{ badge.time }}</p>
+                      <p>Issued by: {{ badge.organization }}</p>
+                      <p></p>
+                    </b-col>
+                  </b-row>
+                </b-card>
+              </div>
+            </div>
           </div>
           <div v-if="isUpdateProfile">
             <b-card>
@@ -90,45 +94,45 @@
             <b-row>
               <b-col cols="4" class="text-center">
                 <b-card>
-                  <img src="@/assets/image.png" class />
+                  <img src="@/assets/image.png" class>
                   <h5>Programming Workshop</h5>
                   <p>Venue: J Center Mall Mandaue</p>
                 </b-card>
               </b-col>
               <b-col cols="4" class="text-center">
                 <b-card>
-                  <img src="@/assets/image.png" class />
+                  <img src="@/assets/image.png" class>
                   <h5>Fire Drill Seminar</h5>
                   <p>Venue: Tamlamban Complex</p>
                 </b-card>
               </b-col>
               <b-col cols="4" class="text-center">
                 <b-card>
-                  <img src="@/assets/image.png" class />
+                  <img src="@/assets/image.png" class>
                   <h5>Team Building</h5>
                   <p>Venue: Aboitiz Foundation</p>
                 </b-card>
               </b-col>
             </b-row>
-            <br />
+            <br>
             <b-row>
               <b-col cols="4" class="text-center">
                 <b-card>
-                  <img src="@/assets/image.png" class />
+                  <img src="@/assets/image.png" class>
                   <h5>Programming Workshop</h5>
                   <p>Venue: J Center Mall Mandaue</p>
                 </b-card>
               </b-col>
               <b-col cols="4" class="text-center">
                 <b-card>
-                  <img src="@/assets/image.png" class />
+                  <img src="@/assets/image.png" class>
                   <h5>Fire Drill Seminar</h5>
                   <p>Venue: Tamlamban Complex</p>
                 </b-card>
               </b-col>
               <b-col cols="4" class="text-center">
                 <b-card>
-                  <img src="@/assets/image.png" class />
+                  <img src="@/assets/image.png" class>
                   <h5>Team Building</h5>
                   <p>Venue: Aboitiz Foundation</p>
                 </b-card>
@@ -145,30 +149,33 @@
 export default {
   data() {
     return {
-      post: {},
-      name: "Redgie Gravador",
-      age: 22,
-      gender: "Male",
-      occupation: "Web Developer",
-      years: 10,
-      address: "Talamban, Cebu",
-      email: "redgie@gmail.com",
-      badgename: "Medical Mission",
-      description:
-        "This certificate is issue upon the active voluntarism offered during the medical mission for free vacination",
-      venue: "Talamban health center",
-      date: new Date().toDateString(),
-      time: "9 AM",
-      organization: "Passerelles Numeriques",
+      badgelist: [
+        {
+          badgename: "Medical Mission",
+          description:
+            "This certificate is issue upon the active voluntarism offered during the medical mission for free vacination",
+          venue: "Talamban health center",
+          date: new Date().toDateString(),
+          time: "9 AM",
+          organization: "Passerelles Numeriques"
+        }
+      ],
+      profileinfo: [],
+      username: "mrclay",
       isBadgeList: true,
       isNewsfeed: false,
       isUpdateProfile: false
     };
   },
   created() {
-    let uri = `http://localhost:4000/posts/edit/${this.$route.params.id}`;
-    this.axios.get(uri).then(response => {
-      this.post = response.data;
+    let uri_badgelist = `http://localhost:4000/user/regular/${this.username}`;
+    this.axios.get(uri_badgelist).then(response => {
+      this.badgename = response.data;
+    });
+
+    let uri_profile = `http://localhost:4000/user/regular/profile/${this.username}`;
+    this.axios.get(uri_profile).then(response => {
+      this.profileinfo = response.data;
     });
   },
   methods: {

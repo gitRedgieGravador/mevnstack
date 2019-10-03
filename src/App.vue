@@ -1,8 +1,10 @@
 <template>
   <div>
+    <div id="header">
       <b-navbar toggleable="lg" type="dark" variant="primary">
         <b-navbar-brand>
-          <img src="@/assets/image.png" id="bb-logo" /><b-span class="font">Badgebook</b-span>
+          <img src="@/assets/image.png" id="bb-logo">
+          <b-span class="font">Badgebook</b-span>
         </b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -34,14 +36,15 @@
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
-    <br />
-    <transition name="fade">
-      <router-view></router-view>
-    </transition>
+      <br>
+      <transition name="fade">
+        <router-view></router-view>
+      </transition>
+    </div>`
   </div>
 </template>
 
-<style>
+<style scope>
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
@@ -62,6 +65,10 @@
 
 .center {
   margin: auto;
+}
+
+#header {
+  position: sticky;
 }
 </style>
 
