@@ -15,16 +15,16 @@ Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;
 
-import HomeComponent from './components/HomeComponent.vue';
 import CreateComponent from './components/CreateComponent.vue';
 import IndexComponent from './components/IndexComponent.vue';
 import EditComponent from './components/EditComponent.vue';
-import Userpage from './components/Userpage.vue';
+import Userpage from './views/Userpage.vue';
+import Homepage from './views/Homepage.vue'
 
 const routes = [{
         name: 'home',
         path: '/',
-        component: HomeComponent
+        component: Homepage
     },
     {
         name: 'create',
@@ -37,8 +37,8 @@ const routes = [{
         component: IndexComponent
     },
     {
-        name: 'edit',
-        path: '/edit/:id',
+        name: 'newsfeed',
+        path: '/userpage/newsfeed',
         component: EditComponent
     },
     {
