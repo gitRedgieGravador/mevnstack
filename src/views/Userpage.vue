@@ -11,13 +11,14 @@
               <h3>{{ name }}</h3>
               <button
                 v-on:click="gotoUpdateProfile"
-                class="btn btn-success btn-block"
+                class="btn btn-primary btn-block"
               >Update Profile</button>
             </div>
           </div>
           <div class="card-body">
             <h5 class="card-title">Personal Imformation</h5>
             <div class="card-text">
+              <p>Username: {{ username }}</p>
               <p>Age: {{age}} years old</p>
               <p>Gender: {{ gender }}</p>
               <p>Occupation: {{occupation}}</p>
@@ -31,8 +32,8 @@
           <div class="bg-light text-center">
             <div>
               <b-tabs>
-                <b-tab v-on:click="gotoBadgeList" title="Badge List" active align="left"></b-tab>
-                <b-tab v-on:click="gotoNewsfeed" title="News feed" align="rigth"></b-tab>
+                <b-tab v-on:click="gotoNewsfeed" title="News feed" active align="left"></b-tab>
+                <b-tab v-on:click="gotoBadgeList" title="Badge List" align="right"></b-tab>
               </b-tabs>
             </div>
           </div>
@@ -58,28 +59,52 @@
             </div>
           </div>
           <div v-if="isUpdateProfile">
+            <b-card class="text-center">
+              <h1>Update Profile</h1>
+            </b-card>
             <b-card>
-              <b-center>
-                <h1>Update Profile</h1>
-              </b-center>
               <b-form>
                 <b-row>
                   <b-col>
-                    <b-input-group prepend="Firstname" class="mb-2">
+                    <b-input-group prepend="Firstname" class="mb-3">
                       <b-form-input aria-label="Firstname"></b-form-input>
                     </b-input-group>
                   </b-col>
                   <b-col>
-                    <b-input-group prepend="Lastname" class="mb-2">
+                    <b-input-group prepend="Lastname" class="mb-3">
                       <b-form-input aria-label="Lastname"></b-form-input>
                     </b-input-group>
                   </b-col>
                 </b-row>
-                <b-input-group prepend="Age" class="mb-2">
-                  <b-form-input aria-label="Age"></b-form-input>
+                <b-row>
+                  <b-col>
+                    <b-input-group prepend="Username" class="mb-3">
+                      <b-form-input aria-label="Username"></b-form-input>
+                    </b-input-group>
+                  </b-col>
+                  <b-col cols="5">
+                    <b-input-group prepend="Age" class="mb-3">
+                      <b-form-input aria-label="Age"></b-form-input>
+                    </b-input-group>
+                  </b-col>
+                </b-row>
+                <b-row>
+                  <b-col>
+                    <b-input-group prepend="Occupation" class="mb-3">
+                      <b-form-input aria-label="Occupation"></b-form-input>
+                    </b-input-group>
+                  </b-col>
+                  <b-col cols="4">
+                    <b-input-group prepend="Years" class="mb-3">
+                      <b-form-input aria-label="Occupation"></b-form-input>
+                    </b-input-group>
+                  </b-col>
+                </b-row>
+                <b-input-group prepend="Address" class="mb-3">
+                  <b-form-input aria-label="Address"></b-form-input>
                 </b-input-group>
-                <b-input-group prepend="Occupation" class="mb-2">
-                  <b-form-input aria-label="Occupation"></b-form-input>
+                <b-input-group prepend="Email" class="mb-3" v-model="email">
+                  <b-form-input aria-label="Email"></b-form-input>
                 </b-input-group>
                 <b-form-group label="Gender">
                   <b-form-radio-group id="radio-gender" v-model="gender" name="radio-gender">
@@ -88,6 +113,7 @@
                   </b-form-radio-group>
                 </b-form-group>
               </b-form>
+              <button class="btn btn-primary btn-block btn-lg">Save</button>
             </b-card>
           </div>
           <div v-if="isNewsfeed">
@@ -144,7 +170,6 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   data() {
@@ -167,47 +192,48 @@ export default {
           date: new Date().toDateString(),
           time: "9 AM",
           organization: "Passerelles Numeriques"
-        },
-        {
-          badgename: "Medical Mission",
-          description:
-            "This certificate is issue upon the active voluntarism offered during the medical mission for free vacination",
-          venue: "Talamban health center",
-          date: new Date().toDateString(),
-          time: "9 AM",
-          organization: "Passerelles Numeriques"
-        },
-        {
-          badgename: "Medical Mission",
-          description:
-            "This certificate is issue upon the active voluntarism offered during the medical mission for free vacination",
-          venue: "Talamban health center",
-          date: new Date().toDateString(),
-          time: "9 AM",
-          organization: "Passerelles Numeriques"
         }
       ],
-      profileinfo: [],
+
+      name: "Redgie Gravador",
+      age: 22,
+      gender: "Male",
+      occupation: "Web Developer",
+      years: 5,
+      address: "Tamlamban Cebu",
+      email: "redgie@gmail.com",
       username: "mrclay",
-      isBadgeList: true,
-      isNewsfeed: false,
-      isUpdateProfile: false
+      isBadgeList: false,
+      isNewsfeed: true,
+      isUpdateProfile: false,
+      badge1: "lalala"
     };
   },
   created() {
     let uri_badgelist = `http://localhost:4000/user/regular/${this.username}`;
     this.axios.get(uri_badgelist).then(response => {
-      this.badgename = response.data;
+      this.badgelist = response.data;
     });
 
-    let uri_profile = `http://localhost:4000/user/regular/profile/${this.username}`;
+    let uri_profile = `http://localhost:4000/user/regular/profile/${
+      this.username
+    }`;
     this.axios.get(uri_profile).then(response => {
-      this.profileinfo = response.data;
+      this.username = response.username;
+      this.name = response.name;
+      this.age = response.age;
+      this.gender = response.gender;
+      this.occupation = response.occupation;
+      this.years = response.years;
+      this.address = response.address;
+      this.email = response.email;
     });
   },
   methods: {
     updatePost() {
-      let uri = `http://localhost:4000/user/regular/profile/update/${this.$route.params.id}`;
+      let uri = `http://localhost:4000/user/regular/profile/update/${
+        this.$route.params.id
+      }`;
       this.axios.post(uri, this.post).then(() => {
         this.$router.push({ name: "posts" });
       });
