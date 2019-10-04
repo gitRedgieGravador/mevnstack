@@ -168,6 +168,42 @@ export default {
           date: new Date().toDateString(),
           time: "9 AM",
           organization: "Passerelles Numeriques"
+        },
+        {
+          badgename: "Medical Mission",
+          description:
+            "This certificate is issue upon the active voluntarism offered during the medical mission for free vacination",
+          venue: "Talamban health center",
+          date: new Date().toDateString(),
+          time: "9 AM",
+          organization: "Passerelles Numeriques"
+        },
+        {
+          badgename: "Medical Mission",
+          description:
+            "This certificate is issue upon the active voluntarism offered during the medical mission for free vacination",
+          venue: "Talamban health center",
+          date: new Date().toDateString(),
+          time: "9 AM",
+          organization: "Passerelles Numeriques"
+        },
+        {
+          badgename: "Medical Mission",
+          description:
+            "This certificate is issue upon the active voluntarism offered during the medical mission for free vacination",
+          venue: "Talamban health center",
+          date: new Date().toDateString(),
+          time: "9 AM",
+          organization: "Passerelles Numeriques"
+        },
+        {
+          badgename: "Medical Mission",
+          description:
+            "This certificate is issue upon the active voluntarism offered during the medical mission for free vacination",
+          venue: "Talamban health center",
+          date: new Date().toDateString(),
+          time: "9 AM",
+          organization: "Passerelles Numeriques"
         }
       ],
       upcoming_list1: [
