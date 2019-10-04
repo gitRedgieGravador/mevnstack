@@ -117,52 +117,28 @@
             </b-card>
           </div>
           <div v-if="isNewsfeed">
-            <b-row>
-              <b-col cols="4" class="text-center">
-                <b-card>
-                  <img src="@/assets/image.png" class>
-                  <h5>Programming Workshop</h5>
-                  <p>Venue: J Center Mall Mandaue</p>
-                </b-card>
-              </b-col>
-              <b-col cols="4" class="text-center">
-                <b-card>
-                  <img src="@/assets/image.png" class>
-                  <h5>Fire Drill Seminar</h5>
-                  <p>Venue: Tamlamban Complex</p>
-                </b-card>
-              </b-col>
-              <b-col cols="4" class="text-center">
-                <b-card>
-                  <img src="@/assets/image.png" class>
-                  <h5>Team Building</h5>
-                  <p>Venue: Aboitiz Foundation</p>
-                </b-card>
-              </b-col>
-            </b-row>
+              <b-row>
+                <div v-for="(badge, index) in this.upcoming_list1" :key="index">
+                <b-col class="text-center">
+                  <b-card>
+                    <img src="@/assets/image.png" class>
+                    <h5>{{badge.name}}</h5>
+                    <p>{{badge.venue}}</p>
+                  </b-card>
+                </b-col>
+                </div>
+              </b-row>
             <br>
             <b-row>
-              <b-col cols="4" class="text-center">
-                <b-card>
-                  <img src="@/assets/image.png" class>
-                  <h5>Programming Workshop</h5>
-                  <p>Venue: J Center Mall Mandaue</p>
-                </b-card>
-              </b-col>
-              <b-col cols="4" class="text-center">
-                <b-card>
-                  <img src="@/assets/image.png" class>
-                  <h5>Fire Drill Seminar</h5>
-                  <p>Venue: Tamlamban Complex</p>
-                </b-card>
-              </b-col>
-              <b-col cols="4" class="text-center">
-                <b-card>
-                  <img src="@/assets/image.png" class>
-                  <h5>Team Building</h5>
-                  <p>Venue: Aboitiz Foundation</p>
-                </b-card>
-              </b-col>
+              <div v-for="(badge, index) in this.upcoming_list2" :key="index">
+                <b-col class="text-center">
+                  <b-card>
+                    <img src="@/assets/image.png" class>
+                    <h5>{{badge.name}}</h5>
+                    <p>{{badge.venue}}</p>
+                  </b-card>
+                </b-col>
+              </div>
             </b-row>
           </div>
         </b-col>
@@ -194,7 +170,16 @@ export default {
           organization: "Passerelles Numeriques"
         }
       ],
-
+      upcoming_list1: [
+        { name: "Programming Workshop", venue: "J Center Mall Mandaue" },
+        { name: "Programming Workshop", venue: "J Center Mall Mandaue" },
+        { name: "Programming Workshop", venue: "J Center Mall Mandaue" }
+      ],
+      upcoming_list2: [
+        { name: "Programming Workshop", venue: "J Center Mall Mandaue" },
+        { name: "Programming Workshop", venue: "J Center Mall Mandaue" },
+        { name: "Programming Workshop", venue: "J Center Mall Mandaue" }
+      ],
       name: "Redgie Gravador",
       age: 22,
       gender: "Male",
@@ -205,20 +190,19 @@ export default {
       username: "mrclay",
       isBadgeList: false,
       isNewsfeed: true,
-      isUpdateProfile: false,
-      badge1: "lalala"
+      isUpdateProfile: false
     };
   },
   created() {
     let uri_badgelist = `http://localhost:4000/user/regular/${this.username}`;
-    this.axios.get(uri_badgelist).then(response => {
+    this.axios.post(uri_badgelist).then(response => {
       this.badgelist = response.data;
     });
 
     let uri_profile = `http://localhost:4000/user/regular/profile/${
       this.username
     }`;
-    this.axios.get(uri_profile).then(response => {
+    this.axios.post(uri_profile).then(response => {
       this.username = response.username;
       this.name = response.name;
       this.age = response.age;
@@ -228,14 +212,26 @@ export default {
       this.address = response.address;
       this.email = response.email;
     });
+    let uri_upcomingbadge = `http://localhost:4000/user/regular/${
+      this.username
+    }`;
+    this.axios.post(uri_upcomingbadge).then(response => {
+      for (let i = 0; i <= 6; ++i) {
+        if (i <= 3) {
+          this.upcoming_list1 = response.data[i];
+        } else {
+          this.upcoming_list2 = response.data[i];
+        }
+      }
+    });
   },
   methods: {
-    updatePost() {
+    updateProfile() {
       let uri = `http://localhost:4000/user/regular/profile/update/${
-        this.$route.params.id
+        this.username
       }`;
       this.axios.post(uri, this.post).then(() => {
-        this.$router.push({ name: "posts" });
+        //this.upcoming_list = response.data;
       });
     },
 
