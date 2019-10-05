@@ -66,12 +66,12 @@
               <b-form>
                 <b-row>
                   <b-col>
-                    <b-input-group prepend="Firstname" class="mb-3">
+                    <b-input-group prepend="Firstname" class="mb-3" v-model="firstaname">
                       <b-form-input aria-label="Firstname"></b-form-input>
                     </b-input-group>
                   </b-col>
                   <b-col>
-                    <b-input-group prepend="Lastname" class="mb-3">
+                    <b-input-group prepend="Lastname" class="mb-3" v-model="lastname">
                       <b-form-input aria-label="Lastname"></b-form-input>
                     </b-input-group>
                   </b-col>
@@ -83,24 +83,24 @@
                     </b-input-group>
                   </b-col>
                   <b-col cols="5">
-                    <b-input-group prepend="Age" class="mb-3">
+                    <b-input-group prepend="Age" class="mb-3" v-model="age">
                       <b-form-input aria-label="Age"></b-form-input>
                     </b-input-group>
                   </b-col>
                 </b-row>
                 <b-row>
                   <b-col>
-                    <b-input-group prepend="Occupation" class="mb-3">
+                    <b-input-group prepend="Occupation" class="mb-3" v-model="occupation">
                       <b-form-input aria-label="Occupation"></b-form-input>
                     </b-input-group>
                   </b-col>
                   <b-col cols="4">
-                    <b-input-group prepend="Years" class="mb-3">
+                    <b-input-group prepend="Years" class="mb-3" v-model="years">
                       <b-form-input aria-label="Occupation"></b-form-input>
                     </b-input-group>
                   </b-col>
                 </b-row>
-                <b-input-group prepend="Address" class="mb-3">
+                <b-input-group prepend="Address" class="mb-3" v-model="address">
                   <b-form-input aria-label="Address"></b-form-input>
                 </b-input-group>
                 <b-input-group prepend="Email" class="mb-3" v-model="email">
