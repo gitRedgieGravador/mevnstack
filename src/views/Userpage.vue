@@ -3,7 +3,7 @@
     <div class="bv-example-row pd-side">
       <b-row>
         <b-col class="border-right">
-          <Profile refs="mymethod"></Profile>
+          <Profile v-on:InsideMethod="gotoUpdateProfile"></Profile>
         </b-col>
         <b-col cols="9" class>
           <div class="bg-light text-center">
@@ -11,7 +11,6 @@
               <b-tabs>
                 <b-tab v-on:click="gotoNewsfeed" title="News feed" active align="left"></b-tab>
                 <b-tab v-on:click="gotoBadgeList" title="Badge List" align="right"></b-tab>
-                <b-tab v-on:click="gotoUpdateProfile" title="Update Profile" align="right"></b-tab>
               </b-tabs>
             </div>
           </div>
@@ -32,10 +31,11 @@
   </div>
 </template>
 <script>
-import Mybadge from "@/modules/Mybadge.vue";
-import Newsfeed from "@/modules/Newsfeed.vue";
-import Updateinfo from "@/modules/Updateinfo.vue";
-import Profile from "@/modules/Profile.vue";
+
+import Mybadge from "@/modules/user/Mybadge.vue";
+import Newsfeed from "@/modules/user/Newsfeed.vue";
+import Updateinfo from "@/modules/user/Updateinfo.vue";
+import Profile from "@/modules/user/Profile.vue";
 export default {
   name: "userpage",
   components: {
@@ -66,7 +66,6 @@ export default {
       this.isUpdateProfile = false;
     },
     gotoUpdateProfile() {
-      alert("accesss");
       this.isUpdateProfile = true;
       this.isBadgeList = false;
       this.isNewsfeed = false;
