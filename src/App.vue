@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="header">
-      <b-navbar toggleable="lg" type="dark" variant="primary">
+      <b-navbar toggleable="lg" type="dark" variant="primary" dense fixed header>
         <b-navbar-brand>
           <img src="@/assets/image.png" id="bb-logo">
           <b-span class="font">Badgebook</b-span>
@@ -40,7 +40,7 @@
       <transition name="fade">
         <router-view></router-view>
       </transition>
-    </div>`
+    </div>
   </div>
 </template>
 
@@ -65,10 +65,6 @@
 
 .center {
   margin: auto;
-}
-
-#header {
-  position: sticky;
 }
 </style>
 
