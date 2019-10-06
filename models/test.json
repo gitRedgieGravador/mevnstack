@@ -1,0 +1,13 @@
+({name : "Programming 101 Badge",
+description : "This is a sample description",
+issuedDate : "12/12/12"
+})
+
+ _id: ObjectId("5d974d33b2b16ddfa229326b")
+
+ db.users.insert({name: "Redgie Gravador", username : "mrclay", age : 22, gender : "male", occupation : "Web Developer", experience : 5, address: "Talamban Cebu", email : "redgie@gmail.com",
+    badges: [
+         { _id: ObjectId("5d974d33b2b16ddfa229326b")}
+        
+    ]
+})
