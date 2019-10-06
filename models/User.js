@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
 
-var User = new Schema({
+var UserSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -47,8 +47,17 @@ var User = new Schema({
 
     });
 
-User.plugin(uniqueValidator, { message: 'Error, expected {PATH} to be unique.' });
+UserSchema.plugin(uniqueValidator, { message: 'Error, expected {PATH} to be unique.' });
+
+// UserSchema.pre('save', function(next) {
+//     console.log('before saved')
+  
+//     // everything is done, so let's call the next callback.
+//     next();
+  
+//   });
+  
 
 
 
-module.exports = mongoose.model('User', User);
+module.exports = mongoose.model('User', UserSchema);

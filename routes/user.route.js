@@ -9,7 +9,7 @@ let User = require('../models/User')
 let Badge = require('../models/Badge')
 
 userRoute.route('/regular/profile/:id').post(function (req, res) {
-       // console.log('hello')
+        console.log('hello')
             User.findOne({
                     username: req.params.id
                 }, {
